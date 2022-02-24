@@ -1042,7 +1042,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src/components/CreatePollForm.svelte";
 
-    // (27:4) <Button type="secondary" flat={true}>
+    // (67:4) <Button type="secondary" flat={true}>
     function create_default_slot(ctx) {
     	let t;
 
@@ -1062,7 +1062,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(27:4) <Button type=\\\"secondary\\\" flat={true}>",
+    		source: "(67:4) <Button type=\\\"secondary\\\" flat={true}>",
     		ctx
     	});
 
@@ -1071,21 +1071,33 @@ var app = (function () {
 
     function create_fragment$1(ctx) {
     	let form;
-    	let div0;
+    	let div1;
     	let label0;
     	let t1;
     	let input0;
     	let t2;
-    	let div1;
-    	let label1;
+    	let div0;
+    	let t3_value = /*errors*/ ctx[1].question + "";
+    	let t3;
     	let t4;
+    	let div3;
+    	let label1;
+    	let t6;
     	let input1;
-    	let t5;
-    	let div2;
-    	let label2;
     	let t7;
-    	let input2;
+    	let div2;
+    	let t8_value = /*errors*/ ctx[1].answerA + "";
     	let t8;
+    	let t9;
+    	let div5;
+    	let label2;
+    	let t11;
+    	let input2;
+    	let t12;
+    	let div4;
+    	let t13_value = /*errors*/ ctx[1].answerB + "";
+    	let t13;
+    	let t14;
     	let button;
     	let current;
     	let mounted;
@@ -1104,87 +1116,111 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			form = element("form");
-    			div0 = element("div");
+    			div1 = element("div");
     			label0 = element("label");
     			label0.textContent = "Poll Question";
     			t1 = space();
     			input0 = element("input");
     			t2 = space();
-    			div1 = element("div");
+    			div0 = element("div");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			div3 = element("div");
     			label1 = element("label");
     			label1.textContent = "Answer A:";
-    			t4 = space();
+    			t6 = space();
     			input1 = element("input");
-    			t5 = space();
+    			t7 = space();
     			div2 = element("div");
+    			t8 = text(t8_value);
+    			t9 = space();
+    			div5 = element("div");
     			label2 = element("label");
     			label2.textContent = "Answer B:";
-    			t7 = space();
+    			t11 = space();
     			input2 = element("input");
-    			t8 = space();
+    			t12 = space();
+    			div4 = element("div");
+    			t13 = text(t13_value);
+    			t14 = space();
     			create_component(button.$$.fragment);
     			attr_dev(label0, "for", "question");
-    			attr_dev(label0, "class", "svelte-mvah8q");
-    			add_location(label0, file$1, 15, 8, 311);
+    			attr_dev(label0, "class", "svelte-j7irey");
+    			add_location(label0, file$1, 52, 8, 1237);
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "id", "question");
-    			attr_dev(input0, "class", "svelte-mvah8q");
-    			add_location(input0, file$1, 16, 8, 363);
-    			attr_dev(div0, "class", "form-field svelte-mvah8q");
-    			add_location(div0, file$1, 14, 4, 278);
+    			attr_dev(input0, "class", "svelte-j7irey");
+    			add_location(input0, file$1, 53, 8, 1289);
+    			attr_dev(div0, "class", "error svelte-j7irey");
+    			add_location(div0, file$1, 54, 8, 1360);
+    			attr_dev(div1, "class", "form-field svelte-j7irey");
+    			add_location(div1, file$1, 51, 4, 1204);
     			attr_dev(label1, "for", "answer-a");
-    			attr_dev(label1, "class", "svelte-mvah8q");
-    			add_location(label1, file$1, 19, 8, 474);
+    			attr_dev(label1, "class", "svelte-j7irey");
+    			add_location(label1, file$1, 57, 8, 1451);
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "id", "answer-a");
-    			attr_dev(input1, "class", "svelte-mvah8q");
-    			add_location(input1, file$1, 20, 8, 522);
-    			attr_dev(div1, "class", "form-field svelte-mvah8q");
-    			add_location(div1, file$1, 18, 4, 441);
+    			attr_dev(input1, "class", "svelte-j7irey");
+    			add_location(input1, file$1, 58, 8, 1499);
+    			attr_dev(div2, "class", "error svelte-j7irey");
+    			add_location(div2, file$1, 59, 8, 1569);
+    			attr_dev(div3, "class", "form-field svelte-j7irey");
+    			add_location(div3, file$1, 56, 4, 1418);
     			attr_dev(label2, "for", "answer-b");
-    			attr_dev(label2, "class", "svelte-mvah8q");
-    			add_location(label2, file$1, 23, 8, 632);
+    			attr_dev(label2, "class", "svelte-j7irey");
+    			add_location(label2, file$1, 62, 8, 1659);
     			attr_dev(input2, "type", "text");
     			attr_dev(input2, "id", "answer-b");
-    			attr_dev(input2, "class", "svelte-mvah8q");
-    			add_location(input2, file$1, 24, 8, 680);
-    			attr_dev(div2, "class", "form-field svelte-mvah8q");
-    			add_location(div2, file$1, 22, 4, 599);
-    			attr_dev(form, "class", "svelte-mvah8q");
-    			add_location(form, file$1, 13, 0, 226);
+    			attr_dev(input2, "class", "svelte-j7irey");
+    			add_location(input2, file$1, 63, 8, 1707);
+    			attr_dev(div4, "class", "error svelte-j7irey");
+    			add_location(div4, file$1, 64, 8, 1777);
+    			attr_dev(div5, "class", "form-field svelte-j7irey");
+    			add_location(div5, file$1, 61, 4, 1626);
+    			attr_dev(form, "class", "svelte-j7irey");
+    			add_location(form, file$1, 50, 0, 1152);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
-    			append_dev(form, div0);
-    			append_dev(div0, label0);
-    			append_dev(div0, t1);
-    			append_dev(div0, input0);
-    			set_input_value(input0, /*fields*/ ctx[0].question);
-    			append_dev(form, t2);
     			append_dev(form, div1);
-    			append_dev(div1, label1);
-    			append_dev(div1, t4);
-    			append_dev(div1, input1);
+    			append_dev(div1, label0);
+    			append_dev(div1, t1);
+    			append_dev(div1, input0);
+    			set_input_value(input0, /*fields*/ ctx[0].question);
+    			append_dev(div1, t2);
+    			append_dev(div1, div0);
+    			append_dev(div0, t3);
+    			append_dev(form, t4);
+    			append_dev(form, div3);
+    			append_dev(div3, label1);
+    			append_dev(div3, t6);
+    			append_dev(div3, input1);
     			set_input_value(input1, /*fields*/ ctx[0].answerA);
-    			append_dev(form, t5);
-    			append_dev(form, div2);
-    			append_dev(div2, label2);
-    			append_dev(div2, t7);
-    			append_dev(div2, input2);
+    			append_dev(div3, t7);
+    			append_dev(div3, div2);
+    			append_dev(div2, t8);
+    			append_dev(form, t9);
+    			append_dev(form, div5);
+    			append_dev(div5, label2);
+    			append_dev(div5, t11);
+    			append_dev(div5, input2);
     			set_input_value(input2, /*fields*/ ctx[0].answerB);
-    			append_dev(form, t8);
+    			append_dev(div5, t12);
+    			append_dev(div5, div4);
+    			append_dev(div4, t13);
+    			append_dev(form, t14);
     			mount_component(button, form, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[2]),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[3]),
-    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[4]),
-    					listen_dev(form, "submit", prevent_default(/*submitHandler*/ ctx[1]), false, true, false)
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[3]),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[4]),
+    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[5]),
+    					listen_dev(form, "submit", prevent_default(/*submitHandler*/ ctx[2]), false, true, false)
     				];
 
     				mounted = true;
@@ -1195,17 +1231,22 @@ var app = (function () {
     				set_input_value(input0, /*fields*/ ctx[0].question);
     			}
 
+    			if ((!current || dirty & /*errors*/ 2) && t3_value !== (t3_value = /*errors*/ ctx[1].question + "")) set_data_dev(t3, t3_value);
+
     			if (dirty & /*fields*/ 1 && input1.value !== /*fields*/ ctx[0].answerA) {
     				set_input_value(input1, /*fields*/ ctx[0].answerA);
     			}
+
+    			if ((!current || dirty & /*errors*/ 2) && t8_value !== (t8_value = /*errors*/ ctx[1].answerA + "")) set_data_dev(t8, t8_value);
 
     			if (dirty & /*fields*/ 1 && input2.value !== /*fields*/ ctx[0].answerB) {
     				set_input_value(input2, /*fields*/ ctx[0].answerB);
     			}
 
+    			if ((!current || dirty & /*errors*/ 2) && t13_value !== (t13_value = /*errors*/ ctx[1].answerB + "")) set_data_dev(t13, t13_value);
     			const button_changes = {};
 
-    			if (dirty & /*$$scope*/ 32) {
+    			if (dirty & /*$$scope*/ 128) {
     				button_changes.$$scope = { dirty, ctx };
     			}
 
@@ -1243,9 +1284,40 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('CreatePollForm', slots, []);
     	let fields = { question: '', answerA: '', answerB: '' };
+    	let errors = { question: '', answerA: '', answerB: '' };
+    	let valid = false;
 
     	const submitHandler = () => {
-    		console.log(fields);
+    		valid = true;
+
+    		//validate question 
+    		if (fields.question.trim().length < 5) {
+    			valid = false;
+    			$$invalidate(1, errors.question = 'Question must be at least 5 chars long', errors);
+    		} else {
+    			$$invalidate(1, errors.question = '', errors);
+    		}
+
+    		//validate answer A
+    		if (fields.answerA.trim().length < 1) {
+    			valid = false;
+    			$$invalidate(1, errors.answerA = 'Answer must be at least 1 chars long', errors);
+    		} else {
+    			$$invalidate(1, errors.answerA = '', errors);
+    		}
+
+    		//validate answer A
+    		if (fields.answerB.trim().length < 1) {
+    			valid = false;
+    			$$invalidate(1, errors.answerB = 'Answer must be at least 1 chars long', errors);
+    		} else {
+    			$$invalidate(1, errors.answerB = '', errors);
+    		}
+
+    		// add a new poll if valid is true
+    		if (valid) {
+    			console.log('valid', fields);
+    		}
     	};
 
     	const writable_props = [];
@@ -1269,10 +1341,18 @@ var app = (function () {
     		$$invalidate(0, fields);
     	}
 
-    	$$self.$capture_state = () => ({ Button, fields, submitHandler });
+    	$$self.$capture_state = () => ({
+    		Button,
+    		fields,
+    		errors,
+    		valid,
+    		submitHandler
+    	});
 
     	$$self.$inject_state = $$props => {
     		if ('fields' in $$props) $$invalidate(0, fields = $$props.fields);
+    		if ('errors' in $$props) $$invalidate(1, errors = $$props.errors);
+    		if ('valid' in $$props) valid = $$props.valid;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1281,6 +1361,7 @@ var app = (function () {
 
     	return [
     		fields,
+    		errors,
     		submitHandler,
     		input0_input_handler,
     		input1_input_handler,
