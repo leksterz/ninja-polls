@@ -1,10 +1,12 @@
 <script>
 export let poll;
+import Card from "../shared/Card.svelte"
 //reactive values 
 $: totalVotes = poll.votesA + poll.votesB;
 </script>
 
 
+<Card>
 <div class="poll">
 <h3>{poll.question}</h3>
 <p>Total Votes: {totalVotes}</p>
@@ -17,6 +19,7 @@ $: totalVotes = poll.votesA + poll.votesB;
     <span>{poll.answerB} ({poll.votesB})</span>
 </div>
 </div>
+</Card>
 
 <style>
 h3 {
