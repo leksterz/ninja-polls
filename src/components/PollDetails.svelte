@@ -1,18 +1,29 @@
 <script>
-    import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
+    import PollStore from "../stores/PollStore";
+
     export let poll;
     import Card from "../shared/Card.svelte";
     //reactive values
     $: totalVotes = poll.votesA + poll.votesB;
 
-    const handleVote = (option, id) => {
-        dispatch("vote", { option, id });
-    };
-
     $: calcWidthA = Math.floor((100 / totalVotes) * poll.votesA);
 
     $: calcWidthB = Math.floor((100 / totalVotes) * poll.votesB);
+
+    const handleVote = (option, id) => {
+        PollStore.update((currentPolls) => {
+            let copiedPolls = [...currentPolls];
+            let upvotedPoll = copiedPolls.find((poll) => poll.id == id);
+            if (option === "a") {
+                upvotedPoll.votesA++;
+            }
+            if (option === "b") {
+                upvotedPoll.votesB++;
+            }
+
+            return copiedPolls;
+        });
+    };
 </script>
 
 <style>

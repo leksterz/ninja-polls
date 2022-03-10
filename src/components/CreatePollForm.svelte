@@ -1,77 +1,62 @@
 <script>
-    import {createEventDispatcher} from 'svelte'
-    import Button from "../shared/Button.svelte"
+    import PollStore from "../stores/PollStore";
+    import { createEventDispatcher } from "svelte";
+    import Button from "../shared/Button.svelte";
 
     let dispatch = createEventDispatcher();
 
     let fields = {
-        question: '',
-        answerA: '',
-        answerB: ''
-    }
+        question: "",
+        answerA: "",
+        answerB: "",
+    };
 
     let errors = {
-        question: '',
-        answerA: '',
-        answerB: ''
-    } 
+        question: "",
+        answerA: "",
+        answerB: "",
+    };
 
     let valid = false;
 
     const submitHandler = () => {
         valid = true;
 
-        //validate question 
+        //validate question
         if (fields.question.trim().length < 5) {
             valid = false;
-            errors.question = 'Question must be at least 5 chars long'
+            errors.question = "Question must be at least 5 chars long";
         } else {
-            errors.question = '';
+            errors.question = "";
         }
 
         //validate answer A
         if (fields.answerA.trim().length < 1) {
             valid = false;
-            errors.answerA = 'Answer must be at least 1 chars long'
+            errors.answerA = "Answer must be at least 1 chars long";
         } else {
-            errors.answerA = '';
+            errors.answerA = "";
         }
 
         //validate answer A
         if (fields.answerB.trim().length < 1) {
             valid = false;
-            errors.answerB = 'Answer must be at least 1 chars long'
+            errors.answerB = "Answer must be at least 1 chars long";
         } else {
-            errors.answerB = '';
+            errors.answerB = "";
         }
 
         // add a new poll if valid is true
         if (valid) {
-            let poll = {...fields, votesA: 0, votesB: 0, id: Math.random()}
-            dispatch('add', poll);
-            console.log('valid', fields)
+            let poll = { ...fields, votesA: 0, votesB: 0, id: Math.random() };
+            // save pole to store
+            PollStore.update((currentPolls) => {
+                return [poll, ...currentPolls];
+            });
+            dispatch("add");
         }
-    }
+    };
 </script>
-
-<form on:submit|preventDefault={submitHandler}>
-    <div class="form-field">
-        <label for="question">Poll Question</label>
-        <input type="text" id="question" bind:value={fields.question}>
-        <div class="error">{errors.question}</div>
-    </div>
-    <div class="form-field">
-        <label for="answer-a">Answer A:</label>
-        <input type="text" id="answer-a" bind:value={fields.answerA}>
-        <div class="error">{errors.answerA}</div>
-    </div>
-    <div class="form-field">
-        <label for="answer-b">Answer B:</label>
-        <input type="text" id="answer-b" bind:value={fields.answerB}>
-        <div class="error">{errors.answerB}</div>
-    </div>
-    <Button type="secondary" flat={true}>Add Poll</Button>
-</form>
 
 <style>
     form {
@@ -95,3 +80,22 @@
         color: red;
     }
 </style>
+
+<form on:submit|preventDefault={submitHandler}>
+    <div class="form-field">
+        <label for="question">Poll Question</label>
+        <input type="text" id="question" bind:value={fields.question} />
+        <div class="error">{errors.question}</div>
+    </div>
+    <div class="form-field">
+        <label for="answer-a">Answer A:</label>
+        <input type="text" id="answer-a" bind:value={fields.answerA} />
+        <div class="error">{errors.answerA}</div>
+    </div>
+    <div class="form-field">
+        <label for="answer-b">Answer B:</label>
+        <input type="text" id="answer-b" bind:value={fields.answerB} />
+        <div class="error">{errors.answerB}</div>
+    </div>
+    <Button type="secondary" flat={true}>Add Poll</Button>
+</form>
