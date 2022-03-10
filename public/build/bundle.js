@@ -41,6 +41,21 @@ var app = (function () {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function validate_store(store, name) {
+        if (store != null && typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, ...callbacks) {
+        if (store == null) {
+            return noop;
+        }
+        const unsub = store.subscribe(...callbacks);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
     function create_slot(definition, ctx, $$scope, fn) {
         if (definition) {
             const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
@@ -1990,7 +2005,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (20:4) {#each polls as poll (poll.id)}
+    // (26:4) {#each $PollStore as poll (poll.id)}
     function create_each_block(key_1, ctx) {
     	let div;
     	let poll;
@@ -2011,7 +2026,7 @@ var app = (function () {
     			div = element("div");
     			create_component(poll.$$.fragment);
     			t = space();
-    			add_location(div, file$1, 20, 8, 404);
+    			add_location(div, file$1, 26, 8, 586);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {
@@ -2023,7 +2038,7 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
     			const poll_changes = {};
-    			if (dirty & /*polls*/ 1) poll_changes.poll = /*poll*/ ctx[2];
+    			if (dirty & /*$PollStore*/ 1) poll_changes.poll = /*poll*/ ctx[2];
     			poll.$set(poll_changes);
     		},
     		i: function intro(local) {
@@ -2045,7 +2060,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(20:4) {#each polls as poll (poll.id)}",
+    		source: "(26:4) {#each $PollStore as poll (poll.id)}",
     		ctx
     	});
 
@@ -2057,7 +2072,7 @@ var app = (function () {
     	let each_blocks = [];
     	let each_1_lookup = new Map();
     	let current;
-    	let each_value = /*polls*/ ctx[0];
+    	let each_value = /*$PollStore*/ ctx[0];
     	validate_each_argument(each_value);
     	const get_key = ctx => /*poll*/ ctx[2].id;
     	validate_each_keys(ctx, each_value, get_each_context, get_key);
@@ -2077,7 +2092,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", "poll-list svelte-31vrvu");
-    			add_location(div, file$1, 18, 0, 336);
+    			add_location(div, file$1, 24, 0, 513);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2092,8 +2107,8 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*polls*/ 1) {
-    				each_value = /*polls*/ ctx[0];
+    			if (dirty & /*$PollStore*/ 1) {
+    				each_value = /*$PollStore*/ ctx[0];
     				validate_each_argument(each_value);
     				group_outros();
     				validate_each_keys(ctx, each_value, get_each_context, get_key);
@@ -2138,15 +2153,12 @@ var app = (function () {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
+    	let $PollStore;
+    	validate_store(PollStore, 'PollStore');
+    	component_subscribe($$self, PollStore, $$value => $$invalidate(0, $PollStore = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('PollList', slots, []);
-    	let { polls = [] } = $$props;
-
-    	PollStore.subscribe(data => {
-    		$$invalidate(0, polls = data);
-    	});
-
-    	const writable_props = ['polls'];
+    	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<PollList> was created with unknown prop '${key}'`);
@@ -2156,27 +2168,14 @@ var app = (function () {
     		bubble.call(this, $$self, event);
     	}
 
-    	$$self.$$set = $$props => {
-    		if ('polls' in $$props) $$invalidate(0, polls = $$props.polls);
-    	};
-
-    	$$self.$capture_state = () => ({ PollStore, Poll: PollDetails, polls });
-
-    	$$self.$inject_state = $$props => {
-    		if ('polls' in $$props) $$invalidate(0, polls = $$props.polls);
-    	};
-
-    	if ($$props && "$$inject" in $$props) {
-    		$$self.$inject_state($$props.$$inject);
-    	}
-
-    	return [polls, vote_handler];
+    	$$self.$capture_state = () => ({ PollStore, Poll: PollDetails, $PollStore });
+    	return [$PollStore, vote_handler];
     }
 
     class PollList extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { polls: 0 });
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -2184,14 +2183,6 @@ var app = (function () {
     			options,
     			id: create_fragment$1.name
     		});
-    	}
-
-    	get polls() {
-    		throw new Error("<PollList>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set polls(value) {
-    		throw new Error("<PollList>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
