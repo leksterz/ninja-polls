@@ -1,14 +1,9 @@
 <script>
     // use exports for props
-    export let type = 'primary';
+    export let type = "primary";
     export let flat = false;
     export let inverse = false;
 </script>
-
-<button class={type} class:flat={flat} class:inverse={inverse}>
-<slot></slot>
-</button>
-
 
 <style>
     button {
@@ -40,5 +35,8 @@
         background: whitesmoke;
         border: 2px solid rgb(41, 157, 8);
     }
-
 </style>
+
+<button class={type} class:flat class:inverse on:click>
+    <slot />
+</button>
